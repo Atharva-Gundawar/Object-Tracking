@@ -27,20 +27,21 @@ def get_bounding_boxs(frame, **kwargs):
 def main():
     """[summary]
     """
-    cam = cv2.VideoCapture(0)
-    kwargs = init_model()
-    while(True):
 
-        ret, frame = cam.read()
+    kwargs = init_model()
+    cap = cv2.VideoCapture('Videos\WIN_20210619_10_22_40_Pro.mp4')
+    while cap.isOpened():
+        ret, frame = cap.read()
+        # if frame is read correctly ret is True
+        if not ret:
+            break
         boxes = get_bounding_boxs(frame, **kwargs)
         for (x, y, w, h) in boxes:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
-
-        cv2.imshow('Face Tracking', frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) == ord('q'):
             break
-
-    cam.release()
+    cap.release()
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
