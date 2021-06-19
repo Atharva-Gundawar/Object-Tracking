@@ -1,13 +1,8 @@
-# Chnage the name of this file to DOCKERFILE then delete this line.
-# Taken from https://github.com/mozilla/generic-python-docker/blob/master/Dockerfile
-
 FROM python:3
-MAINTAINER Atharva Gundawar <atharva.n.gundawar@gmail.com>
 
 ARG APP_NAME=python-application
 ENV APP_NAME=${APP_NAME}
 
-# Guidelines here: https://github.com/mozilla-services/Dockerflow/blob/master/docs/building-container.md
 ARG USER_ID="10001"
 ARG GROUP_ID="app"
 ARG HOME="/app"

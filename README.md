@@ -1,10 +1,18 @@
-# Project Title
+# Object Tracking
 
-One Paragraph of project description goes here
+My implimentation of object tracking by miminizing the Eucledean distance between centroids of bounding boxes between consicutive frames.
 
-## Getting Started
+## How It works
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These are the steps that occ in this object tracking algorithm.
+
+1. Find Bounding boxes using any algorithm.(Here Ill be using basic face haarcascades)
+
+2. Find the centroids of the bounding boxes every frame.
+
+3. Calculate the distance between the centroids of consicutive frames.
+
+4. For every Centroid find the centroid which is closest, and mark it the same id.
 
 ### Prerequisites
 
