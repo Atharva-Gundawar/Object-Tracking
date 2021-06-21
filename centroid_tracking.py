@@ -74,3 +74,55 @@ class Centroid_tracker():
         list_as_array = np.array(matrix)
 
         print(np.transpose(list_as_array).argmin(axis=1)+1)
+    
+class Centroid_tracker:
+    """
+    This is how we will be storing our data 
+    one object of this class will contain 
+        a list of ids
+        a list of coordinates
+        a list of wait_frames missed  
+    """
+    def __init__(self):
+        self.ids = []
+        self.coordinates = []
+        self.wait_frames = []
+
+    def update(self,frame):
+        """[summary]
+
+        Args:
+            frame (List): Will contain sets of coordinates
+                eg : [(1,2), (3,4), (5,6)]
+        """
+
+       
+        mini = 20000
+        min_point = 0
+        cf = [[],[]]
+        counter = self.coordinates
+        for last_coord in self.coordinates:
+            for current_coord in frame:
+                distance = math.dist(last_coord,j)
+                if math.dist(last_coord,current_coord) < mini:
+                    mini = distance
+                    min_point = current_coord
+               
+
+            someindex = self.coordinates.index(last_coord)
+            print(f'The closest point to {last_coord} is {min_point} at {mini} hence its id is {self.ids[someindex]}')
+
+            cf[0].append(self.ids[someindex])
+            cf[1].append(min_point)
+            frame.pop(frame.index(min_point))
+            if len(frame) == 0:
+                break
+
+            mini = 20000
+            min_point = 0
+            row = []
+
+        for ele in frame:
+            if ele not in cf[1]:
+                cf[0].append(max(cf[0])+1)
+                cf[1].append(ele)
