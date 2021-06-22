@@ -27,73 +27,28 @@ Dict : {id : (coordinates),id : (coordinates),id : (coordinates),}
 
 class Centroid_tracker():
 
-    def __init__(self, with_history: bool = False, wait_frames: int = 5, dimensions : int = 2):
-        self.with_history = with_history
-        self.wait_frames = wait_frames
-        self.last_frame = {}
-    
-    def get_ids(self, coordinates : list):
-        poc = [2, 3]
-        last_frame = [[1, 2, 3, 4], [(2, 3), (10, 12), (20, 21), (30,40)]]
-        current_frame =             [(2, 4), (10, 13), (20, 22), (23, 32), (30,41)]
-
-        """ 
-        # Handeles same or more in current
-        for every poitn in current_frame
-            if previous frame ids is not None:
-                find the best match from previous frames and transfer id
-            else : 
-                assign new id 
-
-        # to handle less in current or deregistration:
-        for left over points in previous frame :
-            copy and send them as 
-
+    def __init__(self, with_history: bool = False, max_wait_frames: int = 5, dimensions : int = 2):
         """
-        for point in current_frame:
-            if last_frame[0]:
-                min_distance = 1000000
-                last_points = last_frame[1]
-                for i in last_points:
-                    distance = math.dist(point,i)
-                    # print(point, " ", i, " ", distance)
-                    if distance < min_distance:
-                        min_distance = distance
-                        choosen_point = i
-                # print(f"min distance : between {point} and {choosen_point} is {min_distance}")
+        Initilizes the centroid tracker class
 
-        matrix = []
-        row = []
-
-        for i in last_frame[1]:
-            for j in current_frame:
-                row.append(math.dist(i,j))
-            matrix.append(row)
-            row = []
-
-        list_as_array = np.array(matrix)
-
-        print(np.transpose(list_as_array).argmin(axis=1)+1)
-    
-class Centroid_tracker:
-    """
-    This is how we will be storing our data 
-    one object of this class will contain 
-        a list of ids
-        a list of coordinates
-        a list of wait_frames missed  
-    """
-    def __init__(self):
+        Args:
+            with_history (bool, optional): Refer file Docstirng. Defaults to False.
+            max_wait_frames (int, optional): Num of frames to wait before deregistering a centroid. Defaults to 5.
+            dimensions (int, optional): Dimentions of the detected centroid(2D,3D,etc). Defaults to 2.
+        """
+        self.with_history = with_history
+        self.max_wait_frames = max_wait_frames
+        self.last_frame = {}
         self.ids = []
         self.coordinates = []
         self.wait_frames = []
+    
 
-    def update(self,frame):
+    def update(self,frame: List):
         """[summary]
 
         Args:
-            frame (List): Will contain sets of coordinates
-                eg : [(1,2), (3,4), (5,6)]
+            frame (List): [description]
         """
 
        
