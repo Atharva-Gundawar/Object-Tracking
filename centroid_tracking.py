@@ -36,6 +36,7 @@ class Centroid_tracker():
             max_wait_frames (int, optional): Num of frames to wait before deregistering a centroid. Defaults to 5.
             dimensions (int, optional): Dimentions of the detected centroid(2D,3D,etc). Defaults to 2.
         """
+        
         self.with_history = with_history
         self.max_wait_frames = max_wait_frames
         self.last_frame = {}
@@ -52,32 +53,50 @@ class Centroid_tracker():
         """
 
        
-        mini = 20000
-        min_point = 0
-        cf = [[],[]]
-        counter = self.coordinates
-        for last_coord in self.coordinates:
-            for current_coord in frame:
-                distance = math.dist(last_coord,j)
-                if math.dist(last_coord,current_coord) < mini:
-                    mini = distance
-                    min_point = current_coord
+        # mini = np.inf
+        # min_point = 0
+        # update_frame = [[],[]]
+        # last_frame = self.coordinates
+        # for last_coord in last_frame:
+        #     for current_coord in frame:
+        #         distance = math.dist(last_coord,current_coord)
+        #         if math.dist(last_coord,current_coord) < mini:
+        #             mini = distance
+        #             min_point = current_coord
                
 
-            someindex = self.coordinates.index(last_coord)
-            print(f'The closest point to {last_coord} is {min_point} at {mini} hence its id is {self.ids[someindex]}')
+        #     someindex = last_frame.index(last_coord)
+        #     print(f'The closest point to {last_coord} is {min_point} at {mini} hence its id is {self.ids[someindex]}')
 
-            cf[0].append(self.ids[someindex])
-            cf[1].append(min_point)
-            frame.pop(frame.index(min_point))
-            if len(frame) == 0:
-                break
+        #     update_frame[0].append(self.ids[someindex])
+        #     update_frame[1].append(min_point)
+        #     frame.pop(frame.index(min_point))
+        #     if len(frame) == 0:
+        #         break
 
-            mini = 20000
-            min_point = 0
-            row = []
+        #     mini = 20000
+        #     min_point = 0
+        #     row = []
 
-        for ele in frame:
-            if ele not in cf[1]:
-                cf[0].append(max(cf[0])+1)
-                cf[1].append(ele)
+        # for ele in frame:
+        #     if ele not in update_frame[1]:
+        #         update_frame[0].append(max(update_frame[0])+1)
+        #         update_frame[1].append(ele)
+
+
+        for point in self.coordinates:  
+            for coord in frame:
+                pass
+                # Create mapping here 
+                
+                # where for every point in last frame we will choose a coord in the new frame 
+                # which will be the closes to that point
+                # condition will be that it has to be at a min distance of 10 pixels lets say 
+
+                # update self.coordinates
+                # pop choosen elements from frame
+        
+        # Left over frames
+        for point in frame:
+            pass
+            # register as new point and assign id
