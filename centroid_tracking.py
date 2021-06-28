@@ -2,6 +2,20 @@ import numpy as np
 import math
 
 """
+ALGORITHM:
+1>  Get all detections , 2 opp coordinates and find centroid or just get centroid 
+2>  if there are more new detections then previous detections then outer loop will have previous detections 
+    if number of detections is same the previous will still be in outer loop but condition will be that delta distance or a coordinate can be max of 1/10 of the screen else other methods will be called to test
+    if lesser new detections then newer detections will be in outer loop
+
+3> in all of these cases we can have an add on of the following:
+    a> Similarly index (recognition tech)
+    b> Delta dist should be min of 1/10 of the screen else deregistering and registering
+    c> IOU
+    d> Not just using the centroid but all coordinates to account for scaling
+"""
+
+"""
 Step 1 : get all centroids of current frame
 step 2 : get centroids last frame
 step 3 : record centroids of n frames to draw lines
